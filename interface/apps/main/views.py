@@ -168,3 +168,9 @@ def handler500(request, *args, **argv):
     response = render(request, "500.html", {})
     response.status_code = 500
     return response
+
+
+def test(request, hello):
+    print(hello)
+    # TODO удалить
+    return render(request, "main/test.html", {"hello": hello})

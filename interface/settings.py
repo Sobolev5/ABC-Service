@@ -2,6 +2,8 @@ import os
 import sys
 from django.contrib.messages import constants as message_constants
 
+from dotenv import load_dotenv
+load_dotenv()
 
 # COMMON
 HOST = os.getenv("HOST")

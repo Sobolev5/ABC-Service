@@ -1,8 +1,12 @@
-# Test server for great things
+# Learning server for great things
 
 Userful dev commands:
 ```
-export $(cat .env | xargs) && source interface/env/bin/activate && python interface/manage.py runserver 0.0.0.0:1234 # run server
+python manage.py runserver 0.0.0.0:1234 # run server 
+python manage.py makemigrations
+python manage.py migrate
+
+export $(cat .env | xargs) && source interface/env/bin/activate && python interface/manage.py runserver 0.0.0.0:1234 # run server 
 export $(cat .env | xargs) && source interface/env/bin/activate && python interface/manage.py makemigrations
 export $(cat .env | xargs) && source interface/env/bin/activate && python interface/manage.py migrate
 ```
