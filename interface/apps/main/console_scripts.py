@@ -3,27 +3,25 @@ import sys
 
 def dive_into_python():
         
-    # size
-    aa = {"a":"b"}  
+    a = {"key":"value"}  
 
     # refcount
-    print("sys.getrefcount(a):", sys.getrefcount(aa))
-    bb = aa
-    print("sys.getrefcount(a):", sys.getrefcount(aa))
-    cc = aa
-    print("sys.getrefcount(a):", sys.getrefcount(aa))
+    print("sys.getrefcount(a):", sys.getrefcount(a))
+    b = a
+    print("sys.getrefcount(a):", sys.getrefcount(a))
+    c = a
+    print("sys.getrefcount(a):", sys.getrefcount(a))
 
     print(locals())
 
-    aa = 2
-    # size
+    a = 2
+    # size int
     print("sys.getsizeof(int):", sys.getsizeof(int()))
-    print("sys.getsizeof(int):", sys.getsizeof(aa))
+    print("sys.getsizeof(int):", sys.getsizeof(a))
     
     # all is object
-    print("dir(a):", dir(aa))
-    print("a.real:", aa.real)
-
+    print("dir(a):", dir(a))
+    print("a.real:", a.real)
 
 
 
