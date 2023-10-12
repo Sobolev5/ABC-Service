@@ -1,0 +1,15 @@
+version: '3.2'
+
+services:
+
+  abc-interface-dev:
+    container_name: abc-interface-dev
+    env_file: .env
+    ports:
+      - 54321:12345   
+    volumes:
+      - ./interface:/interface
+    build: 
+      target: runserver
+      context: ./interface/
+      dockerfile: Dockerfile  

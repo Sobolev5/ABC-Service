@@ -1,0 +1,28 @@
+- name: Pull and build 
+  shell: |           
+    cd /var/www/abc-service
+    git pull origin master      
+    docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+
+- name: Migrate
+  shell: |             
+    docker exec -i abc-interface python manage.py migrate
+  ignore_errors: true
+
+- name: Dump
+  shell: |       
+    cd /var/www/abc-service   
+    docker exec -it abc-postgres pg_dump -cU abc_user abc_service > db.sql
+  ignore_errors: true
+
+- name: Copy DB
+  shell: |       
+    rm -rf /root/ABC-Service/db.sql
+    cp -f db.sql /root/ABC-Service/db.sql
+  ignore_errors: true
+
+- name: Restore DB
+  shell: |       
+    cd /root/ABC-Service 
+    cat db.sql | docker exec -i abc-postgres psql -U abc_user -d abc_service
+  ignore_errors: true

@@ -1,0 +1,5 @@
+- hosts: python_education
+  remote_user: root
+  become: yes 
+  tasks:
+    - import_tasks: tasks/zoo.yml

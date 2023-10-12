@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+
+  abc-interface-prod:
+    container_name: abc-interface-prod
+    env_file: .env
+    ports:
+      - 12345:12345
+    build: 
+      target: gunicorn
+      context: ./interface/
+      dockerfile: Dockerfile  
+    

@@ -1,0 +1,56 @@
+{% extends "chat/base.html" %}
+{% load chat_tags %}
+
+{% block header %}
+    <h1>Lordaeron lands</h1>    
+    <p class="fs-5 col-md-8">Room: {{ room_name }}</p>
+    <hr class="col-3 col-md-2 mb-5">
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6">
+        {% for message in messages %}  
+            <div class="row mb-2">  
+                <div class="col-2">
+                    <img class="img-fluid" src="{{ STATIC_URL }}chat/footman.webp"/>
+                </div>
+                <div class="col-4">
+                    <b>{{ message.author|show_hp }}:</b>
+                    <br>
+                    {% warrior_quote message.author %} {{ message.message }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-6">
+        <form action="" method="POST">           
+            {% csrf_token %}
+            <div class="mb-3 ">
+                <label class="form-label">Warrior:</label>
+                <input type="text" class="form-control" name="author" value="{% if request.POST.author %}{{ request.POST.author }}{% else %}Footman{% endif %}">
+                {{ form.author.errors }}
+                <br>                            
+                <label class="form-label">Message:</label>
+                <input type="text" class="form-control" name="message" value="{% if request.POST.message %}{{ request.POST.message }}{% else %}Lordaeron rise{% endif %}">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% if form.errors %}
+                {% for field, errors in form.errors.items %}
+                    {% if field == '__all__' %}
+                        <h3>{{ errors }}</h3>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+    <div>
+        <figure class="text-end">
+            <blockquote class="blockquote">
+              <p> Lordaeron is the northernmost continent of the Eastern Kingdoms.</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                The land is <cite title="Source Title">rugged and largely mountainous</cite>            
+            </figcaption>
+        </figure>   
+    </div>
+{% endblock %}

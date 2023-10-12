@@ -1,0 +1,22 @@
+version: '3.2'
+
+services:
+
+  django-wsgi:
+    container_name: django-wsgi
+    build: 
+      context: ./
+      dockerfile: Dockerfile 
+    environment:
+      DEBUG: ${DEBUG}     
+    restart: unless-stopped 
+    ports:
+      - 10000:10000
+    networks:
+      - django-wsgi  
+
+networks:
+  django-wsgi:
+    driver: bridge
+  
+  
